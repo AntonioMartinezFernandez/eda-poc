@@ -1,0 +1,105 @@
+version: "3.8"
+
+services:
+  localstack:
+    image: localstack/localstack:2.0.2
+    container_name: localstack
+    ports:
+      - "127.0.0.1:4566:4566" # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559" # External services port range
+      - "127.0.0.1:443:443" # LocalStack HTTPS Gateway
+    env_file:
+      - local.env
+    volumes:
+      - "./volumes/localstack:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  mysql:
+    platform: linux/amd64
+    image: mysql:5.7
+    container_name: mysql
+    command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+      - ./migrations/database.sql:/docker-entrypoint-initdb.d/datadump.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mysql-db
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=MyPassword1234
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt-broker
+    volumes:
+      - ./volumes/mqtt/config/:/mosquitto/config/
+      - ./volumes/mqtt/log/:/mosquitto/log/
+      - ./volumes/mqtt/data:/mosquitto/data/
+    ports:
+      - "1883:1883"
+      - "9002:9001"
+    restart: unless-stopped
+
+  gateway-ws:
+    build:
+      context: ../gateway-ws
+      dockerfile: Dockerfile
+    container_name: gateway-ws
+    ports:
+      - 9000:9000
+      - 9001:9001
+    tty: true
+    depends_on:
+      - localstack
+    volumes:
+      - ../gateway-ws:/app/gateway-ws
+
+  message-processor:
+    build:
+      context: ../message-processor
+      dockerfile: Dockerfile
+    container_name: message-processor
+    ports:
+      - 8010:8010
+    tty: true
+    depends_on:
+      - localstack
+      - mqtt-broker
+    volumes:
+      - ../message-processor:/app
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - 8020:8020
+    tty: true
+    depends_on:
+      - localstack
+      - mysql
+      - redis
+      - gateway-ws
+    volumes:
+      - ../backend:/app
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - 8030:8030
+    tty: true
+    depends_on:
+      - backend

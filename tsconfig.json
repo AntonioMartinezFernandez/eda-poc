@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2019",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "sourceMap": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "baseUrl": "."
+    // "paths": {
+    //   "@/*": ["./src/*"]
+    // }
+  },
+  "include": ["mock-device/**/*", "backend/**/*", "message-processor/**/*"],
+  "exclude": ["node_modules"]
+}

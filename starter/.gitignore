@@ -1,0 +1,10 @@
+# Terraform
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+
+# SonarQube
+.scannerwork
+sonarqube.md
+sonar-project.properties

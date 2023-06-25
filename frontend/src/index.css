@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+:root {
+  font-family: 'Special Elite', cursive;
+}
+
+/* Remove underline decorator from links */
+a {
+  text-decoration: none;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 50%;
+  padding: 1em 1em;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -1em;}
+
+/* Clear floats after the columns */
+.row:after {
+  display: block;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 0.3em 0.6em 0 rgba(0, 0, 0, 0.2);
+  padding: 1em;
+  text-align: center;
+  background-color: #252525;
+}
+
+/* Float four columns side by side */
+.dashboard-column {
+  float: left;
+  width: 100%;
+  padding: 1em 1em 3em 1em;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.dashboard-row {margin: 0 -1em;}
+
+/* Clear floats after the columns */
+.dashboard-row:after {
+  display: block;
+  clear: both;
+}
+
+/* Style the counter cards */
+.dashboard-card {
+  box-shadow: 0 0.3em 0.6em 0 rgba(0, 0, 0, 0.2);
+  padding: 1em;
+  text-align: center;
+  background-color: #252525;
+}
+
+.circularDimmer {
+  margin: 2em;
+}
+
+.circularDimmer code {
+  color: rgb(0, 140, 137)
+}
+
+.disabledElement {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+button {
+  border: none;
+  color: white;
+  padding: 0.5em 1em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  margin: 0.2em 0.2em;
+  cursor: pointer;
+  border-radius: 0.2em;
+}
+
+/* Footer */
+#footer {
+  width: 100%;
+  font-size: 0.7em;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  padding-right: 10px;
+  text-align: right;
+  background: #252525;
+}
