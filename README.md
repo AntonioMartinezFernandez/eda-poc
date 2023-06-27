@@ -1,4 +1,4 @@
-# Event Drive Architecture - Proof of Concept
+# Event-Driven Architecture - Proof of Concept
 
 ![Diagram](./diagram.jpg)
 

@@ -8,3 +8,9 @@ terraform.tfstate.backup
 .scannerwork
 sonarqube.md
 sonar-project.properties
+
+# Volumes
+volumes/mysql
+volumes/localstack
+volumes/mqtt/data
+volumes/mqtt/log
