@@ -8,6 +8,7 @@ Requirements:
 
 - [NodeJS](https://nodejs.org/en/) > v18
 - [NVM](https://github.com/nvm-sh/nvm)
+- [Golang](https://go.dev/dl/) > 1.20
 - [Docker](https://www.docker.com/)
 - [MQTT-Explorer](http://mqtt-explorer.com/) [useful but not mandatory]
 - Terraform
